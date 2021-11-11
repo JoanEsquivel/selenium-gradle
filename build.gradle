@@ -1,0 +1,32 @@
+plugins {
+    id 'java'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '4.0.0'
+    testImplementation group: 'org.testng', name: 'testng', version: '7.4.0'
+    testImplementation("io.github.bonigarcia:webdrivermanager:5.0.3")
+
+}
+
+test {
+    //Allows the framework to run TestNG scripts
+    useTestNG()
+    //Use Logging to get statuses and logs
+    testLogging {
+        events "PASSED", "SKIPPED", "FAILED", "STANDARD_OUT", "STANDARD_ERROR"
+    }
+    //If we want to send system properties by CLI like -Durl, we need this line.
+    systemProperties = System.properties
+}
+
+//To run this simple test just use:
+//gradle -Durl=test clean test --tests "testScript"
+
